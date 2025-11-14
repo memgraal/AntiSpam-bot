@@ -8,6 +8,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from config import TOKEN
 from handlers.captcha import captcha_ok
 from handlers.admin_panel import router_admin
+from handlers.messages import handle_message
 
 from middlewares.db_middleware import db_session_middleware
 from middlewares.message_middleware import AuthorizedMessageMiddleware
@@ -37,9 +38,8 @@ async def main():
 
     # --- Все остальные текстовые сообщения ---
     ## ВО ВСЕХ ТВОИХ БЕДАХ ВИНОВАТА ЭТА СТРОЧКА
-    ## dp.message.register(handle_message, F.text)
+    dp.message.register(handle_message)
 
-    print("🤖 Бот запущен...")
     await dp.start_polling(bot)
 
 
