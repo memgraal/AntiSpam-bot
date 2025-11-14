@@ -7,7 +7,6 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from config import TOKEN
 from handlers.captcha import captcha_ok
-from handlers.messages import handle_message
 from handlers.admin_panel import router_admin
 
 from middlewares.db_middleware import db_session_middleware
