@@ -4,7 +4,6 @@ from typing import Callable, Dict, Any, Awaitable
 
 from aiogram import BaseMiddleware, types
 from dotenv import load_dotenv
-from google import genai  
 from pydantic import BaseModel, Field
 import pymorphy3
 
