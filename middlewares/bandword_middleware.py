@@ -8,10 +8,10 @@ from google import genai
 from pydantic import BaseModel, Field
 import pymorphy3
 
+from config import BANNED_WORDS
 
 load_dotenv()
 
-BANNED_WORDS = ["реклама", "крипта", "бот", "подписывайся"]
 
 morph = pymorphy3.MorphAnalyzer()
 

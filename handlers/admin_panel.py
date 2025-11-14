@@ -1,4 +1,5 @@
 # handlers/admin_panel.py
+import logging
 from aiogram import Router, F, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.fsm.context import FSMContext
@@ -6,6 +7,9 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.filters import Command, StateFilter
 
 from database.models import Session, Group, GroupSettings, BadWord
+
+## Присоединяем логирование к основному
+logger = logging.getLogger(__name__)
 
 router_admin = Router()
 
@@ -56,6 +60,7 @@ def group_settings_kb(group_id: int, settings: dict) -> InlineKeyboardMarkup:
 # Хендлеры
 # -------------------------
 async def admin_panel(message: types.Message):
+    print("🔥 ADMIN HANDLER WORKED")
     if message.chat.type != "private":
         return
 

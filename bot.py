@@ -1,7 +1,9 @@
+import logging
 import asyncio
 from aiogram import Bot, Dispatcher, F, types
 from aiogram.client.default import DefaultBotProperties
 from aiogram.fsm.storage.memory import MemoryStorage
+
 
 from config import TOKEN
 from handlers.captcha import captcha_ok
@@ -13,10 +15,14 @@ from middlewares.message_middleware import AuthorizedMessageMiddleware
 from middlewares.bandword_middleware import CensorshipMiddleware
 from middlewares.chat_id_middleware import GroupRegisterMiddleware
 
+## Можно не пихать объявление бота и диспатчера в функцию
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+dp = Dispatcher(storage=MemoryStorage())
+
 
 async def main():
-    bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
-    dp = Dispatcher(storage=MemoryStorage())
+    ## Добавил логирование
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
     # --- Middleware ---
     dp.update.middleware(db_session_middleware)
@@ -31,7 +37,8 @@ async def main():
     dp.include_router(router_admin)
 
     # --- Все остальные текстовые сообщения ---
-    dp.message.register(handle_message, F.text)
+    ## ВО ВСЕХ ТВОИХ БЕДАХ ВИНОВАТА ЭТА СТРОЧКА
+    ## dp.message.register(handle_message, F.text)
 
     print("🤖 Бот запущен...")
     await dp.start_polling(bot)
